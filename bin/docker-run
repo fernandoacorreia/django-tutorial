@@ -1,0 +1,24 @@
+#!/bin/bash
+#
+# Runs a command in a Docker container using the Django image.
+#
+set -o nounset -o errexit -o pipefail
+
+declare -r script_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+
+function die() { echo >&2 "$@"; exit 1; }
+
+DJANGO_DOCKER_IMAGE='fernandoacorreia/django-docker:2.0.6'
+CURRENT_USER=$(whoami)
+USER_ID=$(id -u $CURRENT_USER)
+GROUP_ID=$(id -g $CURRENT_USER)
+
+docker run \
+  --rm \
+  -it \
+  -v $(pwd):$(pwd) \
+  -w $(pwd) \
+  --network=host \
+  --user $USER_ID:$GROUP_ID \
+  $DJANGO_DOCKER_IMAGE \
+  $@
