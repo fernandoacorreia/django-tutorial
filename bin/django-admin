@@ -8,7 +8,7 @@ declare -r script_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
 function die() { echo >&2 "$@"; exit 1; }
 
-DJANGO_DOCKER_IMAGE='fernandoacorreia/django-docker'
+DJANGO_DOCKER_IMAGE='fernandoacorreia/django-docker:2.0.6'
 CURRENT_USER=$(whoami)
 USER_ID=$(id -u $CURRENT_USER)
 GROUP_ID=$(id -g $CURRENT_USER)
