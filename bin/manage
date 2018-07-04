@@ -8,4 +8,4 @@ declare -r script_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
 function die() { echo >&2 "$@"; exit 1; }
 
-exec $script_dir/manage runserver
+exec $script_dir/docker-run python manage.py $@
